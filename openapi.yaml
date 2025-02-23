@@ -1,0 +1,554 @@
+openapi: 3.0.3
+info:
+  title: API design
+  description: |
+    This is a sample of API design. More info here.
+  contact:
+    name: Fabio Ribeiro
+    email: A00326833@student.tus.ie
+  version: 1.0.0
+  license:
+    name: MIT
+    url: https://https://github.com/fabioar87/microservices-arch-assignment-1/LICENSE
+servers:
+  - url: '/'
+tags:
+  - name: Customer
+    description: Operation related to Customer metadata
+  - name: Order
+    description: Operations related to Customer's order metadata
+paths:
+  /api/v1/orders:
+    post:
+      tags:
+        - Order
+      summary: Create new order for the given order request
+      description: Creates a new order
+      operationId: addOrder
+      requestBody:
+        description: New order request object
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/NewOrder'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewOrder'
+      responses:
+        201:
+          description: Order added with success
+          content:
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+        406:
+          description: If something wrong happens, i.e payment failure
+          content: {}
+    get:
+      tags:
+        - Order
+      summary: Return orders by Customer id
+      description: Return orders by Customer id
+      operationId: getOrdersByCustomerId
+      parameters:
+        - name: customerId
+          in: query
+          description: Customer id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: All orders fetched with success
+          content:
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+        404:
+          description: Order does not exist
+          content: {}
+  /api/v1/orders/{id}:
+    get:
+      tags:
+        - Order
+      summary: Given an id returns the order
+      description: Given an id returns the order
+      operationId: getOrdersByOrderId
+      parameters:
+        - name: id
+          in: path
+          description: Order id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Order exists
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Order'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        404:
+          description: Order not found
+          content: {}
+    delete:
+      tags:
+        - Order
+      summary: Delete an order
+      description: Delete an order
+      operationId: deleteOrdersByOrderId
+      parameters:
+        - name: id
+          in: path
+          description: Order id
+          required: true
+          schema:
+            type: string
+      responses:
+        202:
+          description: Request accepted, returns this status even if user does not exist
+          content: { }
+        404:
+          description: Order not found
+          content: { }
+    put:
+      tags:
+        - Order
+      summary: Edit an order
+      description: Edit an order
+      operationId: updateOrdersByOrderId
+      parameters:
+        - name: id
+          in: path
+          description: Order id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Order
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Order'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        201:
+          description: Order updated successfully
+          content: { }
+        404:
+          description: Order not found
+          content: { }
+  /api/v1/customers/:
+    post:
+      tags:
+        - Customer
+      summary: Create a new customer
+      description: Create a new customer
+      operationId: addCustomer
+      requestBody:
+        description: New customer request object
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Customer'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+      responses:
+        201:
+          description: Customer added with success
+          content:
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+        404:
+          description: Customer creation error
+          content: {}
+    get:
+      tags:
+        - Customer
+      summary: Return all customers
+      description: Return all customers
+      operationId: getAllCustomers
+      responses:
+        200:
+          description: For successful fetch.
+          content:
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+        404:
+          description: Customer not found
+          content: { }
+  /api/v1/customers/{id}:
+    get:
+      tags:
+        - Customer
+      summary: Return a customer
+      description: Return a customer
+      operationId: getCustomerById
+      parameters:
+        - name: id
+          in: path
+          description: Customer Identifier
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: For successful fetch.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Customer'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        404:
+          description: Customer not found
+          content: { }
+    delete:
+      tags:
+        - Customer
+      summary: Deletes the customer
+      description: Deletes the customer
+      operationId: deleteCustomerById
+      parameters:
+        - name: id
+          in: path
+          description: Customer Identifier
+          required: true
+          schema:
+            type: string
+      responses:
+        202:
+          description: Request accepted, returns this status even if user does not exist
+          content: { }
+    put:
+      tags:
+        - Customer
+      summary: Update a customer
+      description: Update a customer
+      operationId: updateCustomerById
+      parameters:
+        - name: id
+          in: path
+          description: Customer Identifier
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: New customer request object
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Customer'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+      responses:
+        201:
+          description: Customer updated successfully
+          content: { }
+        404:
+          description: Customer not found
+          content: { }
+  /api/v1/products/:
+    post:
+      tags:
+        - Product
+      summary: Create new product
+      description: Creates a new product
+      operationId: addProduct
+      requestBody:
+        description: New product request object
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Product'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        201:
+          description: Order added with success
+          content:
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+        404:
+          description: If something wrong happens, i.e payment failure
+          content: { }
+    get:
+      tags:
+        - Product
+      summary: Returns all products
+      description: Returns the products
+      operationId: getAllProducts
+      parameters:
+        - name: name
+          in: query
+          description: Product name
+          required: false
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Query page number
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 1
+        - name: size
+          in: query
+          description: Query page size
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
+      responses:
+        200:
+          description: Products fetched with success
+          content:
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+  /api/v1/products/{id}:
+    get:
+      tags:
+        - Product
+      summary: Return a product
+      description: Return a product
+      operationId: getProductById
+      parameters:
+        - name: id
+          in: path
+          description: Product Identifier
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: For successful fetch.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Product'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        404:
+          description: Product not found
+          content: { }
+    delete:
+      tags:
+        - Product
+      summary: Delete a product
+      description: Delete a product
+      operationId: deleteProductById
+      parameters:
+        - name: id
+          in: path
+          description: Product Identifier
+          required: true
+          schema:
+            type: string
+      responses:
+        202:
+          description: Request accepted
+          content: { }
+        404:
+          description: Product not found
+          content: { }
+    put:
+      tags:
+        - Product
+      summary: Edit a product
+      description: Edit a product
+      operationId: updateProductById
+      parameters:
+        - name: id
+          in: path
+          description: Product Identifier
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Update product
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Product'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        201:
+          description: Product updated successfully
+          content: { }
+        404:
+          description: Product not found
+          content: { }
+components:
+  schemas:
+    Customer:
+      type: object
+      properties:
+        id:
+          description: Customer identifier
+          type: integer
+          format: int64
+        username:
+          description: Customer username
+          type: string
+        firstName:
+          description: Customer first name
+          type: string
+        lastName:
+          description: Customer last name
+          type: string
+        email:
+          description: Customer contact email
+          type: string
+        phone:
+          description: Customer contact ph.
+          type: string
+        userStatus:
+          description: Reflect the customer status in the system - active || inactive
+          type: boolean
+#        orders:
+#          description: Collection of customer orders
+#          type: array
+#          items:
+#            $ref: '#/components/schemas/Order'
+      xml:
+        name: Customer
+    Order:
+      description: Client order
+      type: object
+      properties:
+        id:
+          description: Order identifier
+          type: string
+        customerId:
+          # description: Customer order owner
+          # $ref: '#/components/schemas/Customer'
+          description: Customer Id
+          type: string
+        date:
+          description: Date of order checkout
+          type: string
+          format: date-time
+        items:
+          description: Collection of item
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
+        total:
+          description: Order total
+          type: number
+          format: double
+        status:
+          description: Describe the order state
+          type: string
+          enum:
+            - CREATED
+            - PAID
+            - PAYMENT_FAILED
+            - PROCESSED
+      xml:
+        name: Order
+    Item:
+      description: Selected item in an order, correlates product and order
+      type: object
+      properties:
+        id:
+          description: Item identifier
+          type: string
+        quantity:
+          description: Product quantity in an order
+          type: integer
+          format: int32
+        productId:
+          # description: Product represented by the item
+          # $ref: '#/components/schemas/Product'
+          type: string
+    Product:
+      description: Product model
+      type: object
+      properties:
+        id:
+          description: Product identifier
+          type: string
+        name:
+          description: Product name
+          type: string
+        imageUrl:
+          description: Image URL
+          type: string
+        basePrice:
+          description: Base product price, before taxes applied
+          type: number
+          format: double
+    NewOrder:
+      description: Contains the new order request information
+      type: object
+      properties:
+        customerId:
+          description: Customer Id
+        items:
+          type: array
+          items:
+            # $ref: '#/components/schemas/URI'
+            $ref: '#/components/schemas/Item'
+      xml:
+        name: NewOrder
