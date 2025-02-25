@@ -22,4 +22,31 @@ public class ItemEntity {
 
     @ManyToMany(mappedBy = "items", fetch = FetchType.LAZY)
     private List<OrderEntity> orders;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public ItemEntity setId(UUID id) {
+        this.id = id;
+        return this;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public ItemEntity setQuantity(int quantity) {
+        this.quantity = quantity;
+        return this;
+    }
+
+    public ProductEntity getProduct() {
+        return product;
+    }
+
+    public ItemEntity setProduct(ProductEntity product) {
+        this.product = product;
+        return this;
+    }
 }

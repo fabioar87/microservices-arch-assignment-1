@@ -17,4 +17,31 @@ public class OrderItemEntity {
 
     @Column(name = "ITEM_ID")
     private UUID itemId;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public OrderItemEntity setId(UUID id) {
+        this.id = id;
+        return this;
+    }
+
+    public UUID getOrderId() {
+        return orderId;
+    }
+
+    public OrderItemEntity setOrderId(UUID orderId) {
+        this.orderId = orderId;
+        return this;
+    }
+
+    public UUID getItemId() {
+        return itemId;
+    }
+
+    public OrderItemEntity setItemId(UUID itemId) {
+        this.itemId = itemId;
+        return this;
+    }
 }

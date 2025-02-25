@@ -29,7 +29,7 @@ public class OrderEntity {
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name="CUSTOMER_ID", nullable=false)
-    private CustomerEntity userEntity;
+    private CustomerEntity customerEntity;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
@@ -38,4 +38,58 @@ public class OrderEntity {
             inverseJoinColumns = @JoinColumn(name = "ITEM_ID")
     )
     private List<ItemEntity> items = new ArrayList<>();
+
+    public UUID getId() {
+        return id;
+    }
+
+    public OrderEntity setId(UUID id) {
+        this.id = id;
+        return this;
+    }
+
+    public BigDecimal getTotal() {
+        return total;
+    }
+
+    public OrderEntity setTotal(BigDecimal total) {
+        this.total = total;
+        return this;
+    }
+
+    public Order.StatusEnum getStatus() {
+        return status;
+    }
+
+    public OrderEntity setStatus(Order.StatusEnum status) {
+        this.status = status;
+        return this;
+    }
+
+    public CustomerEntity getUserEntity() {
+        return customerEntity;
+    }
+
+    public OrderEntity setUserEntity(CustomerEntity customerEntity) {
+        this.customerEntity = customerEntity;
+        return this;
+    }
+
+    public Timestamp getOrderDate() {
+        return orderDate;
+    }
+
+    public OrderEntity setOrderDate(Timestamp orderDate) {
+        this.orderDate = orderDate;
+        return this;
+    }
+
+    public List<ItemEntity> getItems() {
+        return items;
+    }
+
+    public OrderEntity setItems(List<ItemEntity> items) {
+        this.items = items;
+        return this;
+    }
 }
