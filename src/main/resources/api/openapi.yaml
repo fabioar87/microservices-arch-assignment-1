@@ -464,7 +464,7 @@ components:
           type: string
         userStatus:
           description: Reflect the customer status in the system - active || inactive
-          type: boolean
+          type: string
 #        orders:
 #          description: Collection of customer orders
 #          type: array
