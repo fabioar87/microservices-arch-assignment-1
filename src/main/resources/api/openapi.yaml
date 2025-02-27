@@ -40,13 +40,13 @@ paths:
           content:
             application/xml:
               schema:
-                type: array
-                items:
+#                type: array
+#                items:
                   $ref: '#/components/schemas/Order'
             application/json:
               schema:
-                type: array
-                items:
+#                type: array
+#                items:
                   $ref: '#/components/schemas/Order'
         406:
           description: If something wrong happens, i.e payment failure
