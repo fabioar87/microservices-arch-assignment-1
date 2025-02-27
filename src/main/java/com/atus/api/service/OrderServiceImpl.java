@@ -1,8 +1,6 @@
 package com.atus.api.service;
 
 import com.atus.api.entity.OrderEntity;
-import com.atus.api.exceptions.Error;
-import com.atus.api.exceptions.RestApiErrorHandler;
 import com.atus.api.model.NewOrder;
 import com.atus.api.repository.OrderRepository;
 import jakarta.validation.Valid;

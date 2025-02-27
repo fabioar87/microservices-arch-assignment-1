@@ -324,7 +324,7 @@ paths:
         - Product
       summary: Returns all products
       description: Returns the products
-      operationId: getAllProducts
+      operationId: queryProducts
       parameters:
         - name: name
           in: query

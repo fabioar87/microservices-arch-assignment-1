@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface OrderRepositoryExtension {
 
-    Optional<OrderEntity> insert(NewOrder order);
+    Optional<OrderEntity> insert(NewOrder m);
 }

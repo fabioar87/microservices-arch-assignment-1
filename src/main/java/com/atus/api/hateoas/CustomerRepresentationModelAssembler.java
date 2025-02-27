@@ -33,11 +33,7 @@ public class CustomerRepresentationModelAssembler extends
                     linkTo(methodOn(CustomerController.class).getCustomerById(entity.getId().toString()))
                             .withSelfRel()
             );
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
 
-        try {
             resource.add(
                     linkTo(methodOn(CustomerController.class).getAllCustomers()).withRel("customers")
             );
