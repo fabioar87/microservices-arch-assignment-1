@@ -445,8 +445,7 @@ components:
       properties:
         id:
           description: Customer identifier
-          type: integer
-          format: int64
+          type: string
         username:
           description: Customer username
           type: string
@@ -479,11 +478,12 @@ components:
         id:
           description: Order identifier
           type: string
-        customerId:
+        #customerId:
+        customer:
           # description: Customer order owner
-          # $ref: '#/components/schemas/Customer'
-          description: Customer Id
-          type: string
+          $ref: '#/components/schemas/Customer'
+#          description: Customer Id
+#          type: string
         date:
           description: Date of order checkout
           type: string
@@ -545,6 +545,7 @@ components:
       properties:
         customerId:
           description: Customer Id
+          type: string
         items:
           type: array
           items:
