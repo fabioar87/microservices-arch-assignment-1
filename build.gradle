@@ -3,6 +3,7 @@ plugins {
     id 'org.springframework.boot' version '3.4.3'
     id 'io.spring.dependency-management' version '1.1.7'
     id 'org.hidetake.swagger.generator' version '2.19.2'
+//    id "org.flywaydb.flyway" version "5.2.4"
 }
 
 group = 'com.atus.api'
@@ -64,6 +65,19 @@ dependencies {
     runtimeOnly 'com.h2database:h2'
 }
 
-tasks.named('test') {
+//tasks.named('test') {
+//    useJUnitPlatform()
+//}
+
+test {
+    jvmArgs '--enable-preview'
     useJUnitPlatform()
 }
+
+//bootJar {
+//    manifest {
+//        attributes 'Implementation-Version': "${version}"
+//        attributes 'Implementation-Title': "${project.name}"
+//        attributes 'Manifest-Version': "1.0"
+//    }
+//}

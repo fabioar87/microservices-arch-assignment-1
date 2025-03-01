@@ -29,10 +29,10 @@ public class CustomerEntity {
     @Column(name = "PHONE")
     private String phone;
 
-    @Column(name = "USER_STATUS")
-    private String userStatus;
+    @Column(name = "CUSTOMER_STATUS")
+    private String customerStatus;
 
-    @OneToMany(mappedBy = "userEntity", fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(mappedBy = "customerEntity", fetch = FetchType.LAZY, orphanRemoval = true)
     private List<OrderEntity> orders;
 
     public UUID getId() {
@@ -89,12 +89,12 @@ public class CustomerEntity {
         return this;
     }
 
-    public String getUserStatus() {
-        return userStatus;
+    public String getCustomerStatus() {
+        return customerStatus;
     }
 
-    public CustomerEntity setUserStatus(String userStatus) {
-        this.userStatus = userStatus;
+    public CustomerEntity setCustomerStatus(String userStatus) {
+        this.customerStatus = userStatus;
         return this;
     }
 
