@@ -5,6 +5,8 @@ import com.atus.api.hateoas.ProductRepresentationModelAssembler;
 import com.atus.api.model.Product;
 import com.atus.api.service.ProductService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,8 +27,11 @@ public class ProductController implements ProductApi {
     public ResponseEntity<List<Product>> queryProducts(@Valid String name,
                                                        @Valid Integer page,
                                                        @Valid Integer size) throws Exception {
-
-        return ResponseEntity.ok(assembler.toListModel(productService.getAllProducts()));
+        // 0-index pagination
+        // improvement: the page and size should be defined in a feasible range
+        page = page - 1;
+        Pageable queryPage = PageRequest.of(page, size);
+        return ResponseEntity.ok(assembler.toListModel(productService.getAllProducts(queryPage)));
     }
 
     @Override

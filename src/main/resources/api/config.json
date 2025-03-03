@@ -12,8 +12,17 @@
   "unhandledException": true,
   "useSpringBoot3": true,
   "useSwaggerUI": true,
+  "typeMappings": {
+    "BigDecimal": "BigDecimal",
+    "EntityModel": "EntityModel"
+  },
   "importMappings": {
+    "BigDecimal": "java.math.BigDecimal",
     "ResourceSupport":"org.springframework.hateoas.RepresentationModel",
-    "Link": "org.springframework.hateoas.Link"
+    "Link": "org.springframework.hateoas.Link",
+    "EntityModel": "org.springframework.hateoas.EntityModel"
+  },
+  "schemaMappings": {
+    "BigDecimal": "java.math.BigDecimal"
   }
 }

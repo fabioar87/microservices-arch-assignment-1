@@ -18,7 +18,7 @@ public class ProductEntity {
     private String name;
 
     @Column(name = "BASE_PRICE")
-    private BigDecimal basePrice;
+    private Double basePrice;
 
     @Column(name = "IMAGE_URL")
     private String imageUrl;
@@ -45,10 +45,10 @@ public class ProductEntity {
     }
 
     public BigDecimal getBasePrice() {
-        return basePrice;
+        return BigDecimal.valueOf(basePrice);
     }
 
-    public ProductEntity setBasePrice(BigDecimal price) {
+    public ProductEntity setBasePrice(Double price) {
         this.basePrice = price;
         return this;
     }

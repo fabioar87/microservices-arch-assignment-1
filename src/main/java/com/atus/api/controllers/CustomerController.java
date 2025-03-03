@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -34,7 +35,12 @@ public class CustomerController implements CustomerApi {
 
     @Override
     public ResponseEntity<List<Customer>> getAllCustomers() throws Exception {
-        return ResponseEntity.ok(assembler.toListModel(customerService.getAllCustomers()));
+        log.info("Request for all customers");
+        try{
+            return ResponseEntity.ok(assembler.toListModel(customerService.getAllCustomers()));
+        } catch (RuntimeException e){
+            throw new RuntimeException("Exception while getting all customers", e);
+        }
     }
 
     @Override

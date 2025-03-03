@@ -36,7 +36,7 @@ public class ProductRepresentationModelAssembler extends
                             .withSelfRel());
 
             resource.add(
-                    linkTo(methodOn(ProductController.class).queryProducts(null, 1, 10))
+                    linkTo(methodOn(ProductController.class).queryProducts(entity.getName(), 1, 10))
                             .withSelfRel());
         } catch (Exception e) {
             throw new RuntimeException(e);

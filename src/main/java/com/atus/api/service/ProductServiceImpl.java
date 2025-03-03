@@ -2,6 +2,8 @@ package com.atus.api.service;
 
 import com.atus.api.entity.ProductEntity;
 import com.atus.api.repository.ProductRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,8 +21,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Iterable<ProductEntity> getAllProducts() {
-        return productRepository.findAll();
+    public Page<ProductEntity> getAllProducts(Pageable pageable) {
+        return productRepository.findAll(pageable);
     }
 
     @Override
