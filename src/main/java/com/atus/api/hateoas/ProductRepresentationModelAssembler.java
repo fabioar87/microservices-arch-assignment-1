@@ -1,7 +1,7 @@
 package com.atus.api.hateoas;
 
 import com.atus.api.controllers.ProductController;
-import com.atus.api.entity.ProductEntity;
+import com.atus.api.dto.ProductDTO;
 import com.atus.api.model.Product;
 import com.atus.api.service.ProductService;
 import org.springframework.beans.BeanUtils;
@@ -18,14 +18,14 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Component
 public class ProductRepresentationModelAssembler extends
-        RepresentationModelAssemblerSupport<ProductEntity, Product> {
+        RepresentationModelAssemblerSupport<ProductDTO, Product> {
 
     public ProductRepresentationModelAssembler(ProductService productService) {
         super(ProductController.class, Product.class);
     }
 
     @Override
-    public Product toModel(ProductEntity entity) {
+    public Product toModel(ProductDTO entity) {
         Product resource = createModelWithId(entity.getId(), entity);
         BeanUtils.copyProperties(entity, resource);
         resource.setId(entity.getId().toString());
@@ -45,7 +45,7 @@ public class ProductRepresentationModelAssembler extends
         return resource;
     }
 
-    public List<Product> toListModel(Iterable<ProductEntity> entities) {
+    public List<Product> toListModel(Iterable<ProductDTO> entities) {
         if(Objects.isNull(entities)) {
             return List.of();
         }
