@@ -1,14 +1,11 @@
 package com.atus.api.exceptions;
 
-import org.apache.logging.log4j.util.Strings;
-
 public class Error {
     private static final long serialVersionUID = 1l;
     private String code;
     private String reqMethod;
     private String errorMessage;
     private Integer status;
-    // private String Url;
 
     public String getReqMethod() {
         return reqMethod;
